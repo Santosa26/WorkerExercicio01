@@ -1,6 +1,5 @@
 package Exercicio.src.entities;
 
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -54,24 +53,25 @@ public void setDepartment(Department department) {
 }
 
 public void addContract(HourContract contract){
-    addContract(contract);
+    contracts.add(contract);
 }
 
 public void removeContract(HourContract contract){
-    removeContract(contract);
+    contracts.remove(contract);
 }
 
 public Double income(Integer month , Integer year){
     double sum = baseSalary;
-    Calendar cal = Calendar.getInstance();
+    
     for(HourContract h: contracts){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(h.getDate());
         int year_Y = cal.get(Calendar.YEAR);
-        int month_M = cal.get(Calendar.MONTH);
+        int month_M = 1 + cal.get(Calendar.MONTH);
         if(month == month_M && year == year_Y){
             sum += h.totalValue();
         }
     } return sum;
 }
-
 
 }
